@@ -6,7 +6,10 @@ struct Node {
     Node *next;
 };
 
-void insertFirst(Node *&head, Node *&tail, int n) {
+Node* head = NULL;
+Node* tail = NULL;
+
+void insertFirst(int n) {
     Node *newNode = new Node;
     newNode->value = n;
     newNode->next = NULL;
@@ -20,7 +23,7 @@ void insertFirst(Node *&head, Node *&tail, int n) {
     }
 }
 
-void insertLast(Node *&head, Node *&tail, int n) {
+void insertLast(int n) {
     Node *newNode = new Node;
     newNode->value = n;
     newNode->next = NULL;
@@ -34,7 +37,7 @@ void insertLast(Node *&head, Node *&tail, int n) {
     }
 }
 
-void insertAfter(Node *&head, Node *&tail, int n, int check) {
+void insertAfter(int n, int check) {
     Node *newNode = new Node;
     newNode->value = n;
     newNode->next = NULL;
@@ -62,9 +65,9 @@ void insertAfter(Node *&head, Node *&tail, int n, int check) {
     }
 }
 
-void deleteAfter(Node *&head, Node *&tail, int check) {
+void deleteAfter(int check) {
     if (head == NULL) {
-        cout << "Linked List is empty" << endl;
+        cout << "Linked List kosong" << endl;
         return;
     }
 
@@ -86,9 +89,9 @@ void deleteAfter(Node *&head, Node *&tail, int check) {
     }
 }
 
-void deleteBefore(Node *&head, Node *&tail, int check) {
+void deleteBefore(int check) {
     if (head == NULL) {
-        cout << "Linked List is empty" << endl;
+        cout << "Linked List kosong" << endl;
         return;
     }
 
@@ -121,9 +124,9 @@ void deleteBefore(Node *&head, Node *&tail, int check) {
     }
 }
 
-void deleteMiddle(Node *&head, Node *&tail, int check) {
+void deleteMiddle(int check) {
     if (head == NULL) {
-        cout << "Linked List is empty" << endl;
+        cout << "Linked List kosong" << endl;
         return;
     }
 
@@ -156,7 +159,7 @@ void deleteMiddle(Node *&head, Node *&tail, int check) {
     }
 }
 
-void print(Node* head) {
+void print() {
     if (head == NULL) {
         cout << "Linked list kosong" << endl;
         return;
@@ -170,7 +173,7 @@ void print(Node* head) {
     cout << endl;
 }
 
-void deleteAll(Node *&head, Node *&tail) {
+void deleteAll() {
     while (head != NULL) {
         Node* temp = head;
         head = head->next;
@@ -180,6 +183,7 @@ void deleteAll(Node *&head, Node *&tail) {
     cout << "Semua node berhasil dihapus" << endl;
 }
 
+// ================= MENU =================
 void showMenu() {
     cout << "\n========== MENU LINKED LIST ==========" << endl;
     cout << "1. Tambah node di depan (insertFirst)" << endl;
@@ -195,9 +199,8 @@ void showMenu() {
     cout << "Pilih menu (0-8): ";
 }
 
+// ================= MAIN =================
 int main() {
-    Node* head = NULL;
-    Node* tail = NULL;
     int choice, value, check;
 
     do {
@@ -207,13 +210,13 @@ int main() {
             case 1:
                 cout << "Masukkan nilai: ";
                 cin >> value;
-                insertFirst(head, tail, value);
+                insertFirst(value);
                 cout << "Node berhasil ditambahkan di depan" << endl;
                 break;
             case 2:
                 cout << "Masukkan nilai: ";
                 cin >> value;
-                insertLast(head, tail, value);
+                insertLast(value);
                 cout << "Node berhasil ditambahkan di belakang" << endl;
                 break;
             case 3:
@@ -221,28 +224,28 @@ int main() {
                 cin >> value;
                 cout << "Masukkan nilai node yang dicari: ";
                 cin >> check;
-                insertAfter(head, tail, value, check);
+                insertAfter(value, check);
                 break;
             case 4:
                 cout << "Masukkan nilai node yang akan dihapus: ";
                 cin >> check;
-                deleteMiddle(head, tail, check);
+                deleteMiddle(check);
                 break;
             case 5:
                 cout << "Masukkan nilai node: ";
                 cin >> check;
-                deleteAfter(head, tail, check);
+                deleteAfter(check);
                 break;
             case 6:
                 cout << "Masukkan nilai node: ";
                 cin >> check;
-                deleteBefore(head, tail, check);
+                deleteBefore(check);
                 break;
             case 7:
-                print(head);
+                print();
                 break;
             case 8:
-                deleteAll(head, tail);
+                deleteAll();
                 break;
             case 0:
                 cout << "Program selesai. Terima kasih!" << endl;
@@ -252,7 +255,7 @@ int main() {
         }
     } while(choice != 0);
 
-    deleteAll(head, tail);
+    deleteAll();
 
     return 0;
 }
