@@ -10,15 +10,15 @@ Node* head = NULL;
 Node* tail = NULL;
 
 void insertFirst(int n) {
-    Node *newNode = new Node;
+    Node *newNode = new Node; //deo
     newNode->value = n;
     newNode->next = NULL;
 
-    if (head == NULL) {
+    if (head == NULL) { //grego
         head = newNode;
         tail = newNode;
     } else {
-        newNode->next = head;
+        newNode->next = head; //abid
         head = newNode;
     }
 }
