@@ -6,17 +6,17 @@ using namespace std;
 
 class Graph {
 private:
-    int numVertices;
+    int numberVertex;
     vector<vector<int>> adjMatrix;
 
 public:
     Graph(int V) {
-        numVertices = V;
-        adjMatrix.resize(numVertices, vector<int>(numVertices, 0));
+        numberVertex = V;
+        adjMatrix.resize(numberVertex, vector<int>(numberVertex, 0));
     }
 
     void addEdge(int i, int j) {
-        if (i >= 0 && i < numVertices && j >= 0 && j < numVertices) {
+        if (i >= 0 && i < numberVertex && j >= 0 && j < numberVertex) {
             adjMatrix[i][j] = 1;
             adjMatrix[j][i] = 1;
         } else {
@@ -26,8 +26,8 @@ public:
 
     void printAdjMatrix() {
         cout << "Adjacency Matrix:" << endl;
-        for (int i = 0; i < numVertices; i++) {
-            for (int j = 0; j < numVertices; j++) {
+        for (int i = 0; i < numberVertex; i++) {
+            for (int j = 0; j < numberVertex; j++) {
                 cout << adjMatrix[i][j] << " ";
             }
             cout << endl;
@@ -35,26 +35,22 @@ public:
     }
 
     void bfs(int startVertex) {
-        vector<bool> visited(numVertices, false);
-        queue<int> q;
+        vector<bool>visited(numberVertex, false);
+        queue<int>titikVisit;
 
-        // Tandai simpul awal sudah dikunjungi dan masukkan ke antrian
+        //langsung ditandai visited
         visited[startVertex] = true;
-        q.push(startVertex);
+        titikVisit.push(startVertex); //untuk menyimpan yang sudah dikunjungi
 
-        while (!q.empty()) {
-            // Ambil simpul dari depan antrian
-            int currentVertex = q.front();
-            q.pop();
-
+        while(!titikVisit.empty()){
+            int currentVertex = titikVisit.front();
+            titikVisit.pop();
             cout << currentVertex;
 
-            // Kunjungi semua tetangga dari simpul saat ini
-            for (int i = 0; i < numVertices; i++) {
-                // Jika ada sisi dan tetangga belum dikunjungi
-                if (adjMatrix[currentVertex][i] == 1 && !visited[i]) {
+            for(int i = 0; i < numberVertex; i++){
+                if(adjMatrix[currentVertex][i] == 1 && !visited[i]){
                     visited[i] = true;
-                    q.push(i);
+                    titikVisit.push(i);
                 }
             }
         }
@@ -64,23 +60,23 @@ public:
 
 
 int main() {
-    Graph g(8);
+    Graph graphLab5(8);
    
     // Parameter fungsi addEdge sekarang menerima angka sesuai gambar
-    g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(1, 3);
-    g.addEdge(1, 4);
-    g.addEdge(2, 5);
-    g.addEdge(3, 6);
-    g.addEdge(4, 7);
+    graphLab5.addEdge(0, 1);
+    graphLab5.addEdge(0, 2);
+    graphLab5.addEdge(1, 3);
+    graphLab5.addEdge(1, 4);
+    graphLab5.addEdge(2, 5);
+    graphLab5.addEdge(3, 6);
+    graphLab5.addEdge(4, 7);
 
     // Cetak adjacency matrix untuk melihat representasi graf
-    g.printAdjMatrix();
+    graphLab5.printAdjMatrix();
     cout << endl;
 
     // Panggil fungsi bfs
-    g.bfs(0);
+    graphLab5.bfs(0);
 
     return 0;
 }
