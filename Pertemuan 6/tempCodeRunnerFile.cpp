@@ -1,0 +1,1 @@
+dist(numVertex, INT_MAX);
